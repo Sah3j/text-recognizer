@@ -47,6 +47,10 @@ function MainContent() {
 
   }*/
 
+  const videoConstraints = {
+    facingMode: { exact: "environment" }
+  };
+
   const webcamRef = useRef(null);
     const [capturedImage, setCapturedImage] = useState(null);
     const [recognizedText, setRecognizedText] = useState('');
@@ -61,15 +65,15 @@ function MainContent() {
 
     return (
       <div>
-          <Webcam ref={webcamRef} audio={false} width={640} height={480} />
-<button onClick={captureImage}>Capture</button>
-{capturedImage && <img src={capturedImage} alt="Captured image" />}
-{recognizedText ? (
-<div>Recognized text: {recognizedText}</div>
-) : (
-<div>Recognized text: </div>
-)}
-</div>
+          <Webcam ref={webcamRef} audio={false} width={640} height={480} videoConstraints={videoConstraints} />
+          <button onClick={captureImage}>Capture</button>
+          {capturedImage && <img src={capturedImage} alt="Captured image" />}
+          {recognizedText ? (
+            <div>Recognized text: {recognizedText}</div>
+          ) : (
+            <div>Recognized text: </div>
+          )}
+      </div>
 );
 }
 
