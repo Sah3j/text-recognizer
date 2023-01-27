@@ -11,8 +11,8 @@ function MainContent() {
       setLoading(true);
         Tesseract.recognize(URL.createObjectURL(selectedImage), 'eng', { logger: m => console.log(m) }).then(({ data: { text } }) => {
             setRecognizedText(text);
+            setLoading(false);
         });
-      setLoading(false);
     }
 
     
@@ -33,7 +33,7 @@ function MainContent() {
                   <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Capture or upload a document image</span></p>
                   <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
               </div>
-              <input id="dropzone-file" type="file" onChange={(e)=>setSelectedImage(e.target.files[0])} class="hidden" />
+              <input id="dropzone-file" accept="image/*" type="file" onChange={(e)=>setSelectedImage(e.target.files[0])} class="hidden" />
           </label>
         </div> 
         }
@@ -52,7 +52,7 @@ function MainContent() {
               : <button onClick={recognizeText} type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Recognize Text</button>}
               <label class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium cursor-pointer rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
                 Upload or Capture New Image
-              <input id="image-file" type="file" onChange={(e)=>setSelectedImage(e.target.files[0])} class="hidden" />
+              <input id="image-file" accept="image/*" type="file" onChange={(e)=>setSelectedImage(e.target.files[0])} class="hidden" />
             </label>
           </>}
         <h5 class="text-2xl mt-8 font-bold text-black">Recognized Text:</h5>
